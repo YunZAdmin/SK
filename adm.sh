@@ -1,57 +1,6 @@
 #!/bin/bash
-#
-#   Dante Socks5 Server AutoInstall
-#   -- Owner:       https://www.inet.no/dante
-#   -- Provider:    https://sockd.info
-#   -- Author:      Lozy
-#
 
-# Check if user is root
-if [ $(id -u) != "0" ]; then
-    echo "Error: You must be root to run this script, please use root to install"
-    exit 1
-fi
-
-REQUEST_SERVER="https://raw.github.com/Lozy/danted/master"
-SCRIPT_SERVER="https://public.sockd.info"
-SYSTEM_RECOGNIZE=""
-
-[ "$1" == "--no-github" ] && REQUEST_SERVER=${SCRIPT_SERVER}
-
-if [ -s "/etc/os-release" ];then
-    os_name=$(sed -n 's/PRETTY_NAME="\(.*\)"/\1/p' /etc/os-release)
-
-    if [ -n "$(echo ${os_name} | grep -Ei 'Debian|Ubuntu' )" ];then
-        printf "Current OS: %s\n" "${os_name}"
-        SYSTEM_RECOGNIZE="debian"
-
-    elif [ -n "$(echo ${os_name} | grep -Ei 'CentOS')" ];then
-        printf "Current OS: %s\n" "${os_name}"
-        SYSTEM_RECOGNIZE="centos"
-    else
-        printf "Current OS: %s is not support.\n" "${os_name}"
-    fi
-elif [ -s "/etc/issue" ];then
-    if [ -n "$(grep -Ei 'CentOS' /etc/issue)" ];then
-        printf "Current OS: %s\n" "$(grep -Ei 'CentOS' /etc/issue)"
-        SYSTEM_RECOGNIZE="centos"
-    else
-        printf "+++++++++++++++++++++++\n"
-        cat /etc/issue
-        printf "+++++++++++++++++++++++\n"
-        printf "[Error] Current OS: is not available to support.\n"
-    fi
-else
-    printf "[Error] (/etc/os-release) OR (/etc/issue) not exist!\n"
-    printf "[Error] Current OS: is not available to support.\n"
-fi
-
-if [ -n "$SYSTEM_RECOGNIZE" ];then
-    wget -qO- --no-check-certificate ${REQUEST_SERVER}/install_${SYSTEM_RECOGNIZE}.sh | \
-        bash -s -- $*  | tee /tmp/danted_install.log
-else
-    printf "[Error] Installing terminated"
-    exit 1
-fi
-
-exit 0
+echo -e "\033[1;31m单 ip/多 ip 以及站群服务器一条龙搭建 sk5 ss vmess 红龙协议等请联系 QQ：319556936 一定要备注通过脚本来的。\033[0m"
+echo -e "\033[1;32m我们另有香港、美国、韩国 kt 家宽双 isp 站群服务器。\033[0m"
+echo -e "\033[1;34m同时通过我们脚本来的用户，无论是单 ip 的云服务器，还是多 ip 的站群服务器，脚本都通用。\033[0m"
+echo -e "\033[1;35m可以联系 QQ：319556936，免费提供搭建脚本。\033[0m"
